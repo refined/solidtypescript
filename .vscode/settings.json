@@ -19,5 +19,7 @@
         "html",
         "markdown"
     ],
-    "eslint.run": "onSave"
+    "eslint.run": "onSave",
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": true
 }
