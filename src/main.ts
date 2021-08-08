@@ -1,12 +1,12 @@
 // --0--
-// import { Order } from "./0_start_point";
-// let order = new Order();
-// order.add_item("Keyboard", 1, 50);
-// order.add_item("SSD", 1, 150);
-// order.add_item("USB cable", 2, 5);
+import { Order } from "./0_start_point";
+const order = new Order();
+order.add_item("Keyboard", 1, 50);
+order.add_item("SSD", 1, 150);
+order.add_item("USB cable", 2, 5);
 
-// console.log(order.total_price());
-// order.pay("debit", "0372846");
+console.log(order.total_price());
+order.pay("debit", "0372846");
 
 // --1-- single responsibility
 // import { Order, PaymentProcessor } from "./1_single_responsibility";
@@ -54,18 +54,35 @@
 // processor.pay(order);
 
 // --4-- interface segregation inheritence
-import {
-    Order,
-    PaypalPaymentProcessor,
-    SmsAuthorizer,
-} from "./4_interface_segregation_segregate";
-const order = new Order();
-order.add_item("Keyboard", 1, 50);
-order.add_item("SSD", 1, 150);
-order.add_item("USB cable", 2, 5);
+// import {
+//     Order,
+//     PaypalPaymentProcessor,
+//     SmsAuthorizer,
+// } from "./4_interface_segregation_segregate";
+// const order = new Order();
+// order.add_item("Keyboard", 1, 50);
+// order.add_item("SSD", 1, 150);
+// order.add_item("USB cable", 2, 5);
 
-console.log(order.total_price());
-const authorizer = new SmsAuthorizer();
-authorizer.verify_code(465839);
-const processor = new PaypalPaymentProcessor("hi@arjancodes.com", authorizer);
-processor.pay(order);
+// console.log(order.total_price());
+// const authorizer = new SmsAuthorizer();
+// authorizer.verify_code(465839);
+// const processor = new PaypalPaymentProcessor("hi@arjancodes.com", authorizer);
+// processor.pay(order);
+
+// --5-- interface segregation inheritence
+// import {
+//     Order,
+//     PaypalPaymentProcessor,
+//     RobotAuthorizer,
+// } from "./5_dependency_inversion";
+// const order = new Order();
+// order.add_item("Keyboard", 1, 50);
+// order.add_item("SSD", 1, 150);
+// order.add_item("USB cable", 2, 5);
+
+// console.log(order.total_price());
+// const authorizer = new RobotAuthorizer();
+// authorizer.not_a_robot();
+// const processor = new PaypalPaymentProcessor("hi@arjancodes.com", authorizer);
+// processor.pay(order);
