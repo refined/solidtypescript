@@ -1,0 +1,23 @@
+{
+    "files.autoSave": "off",
+    "git.autofetch": true,
+    "git.autorefresh": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/*.js": {"when": "$(basename).ts"},
+        "**/*.js.map": true,
+        "node_modules": true
+    },
+
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.probe": [
+        "typescript",
+        "typescriptreact",
+        "html",
+        "markdown"
+    ],
+    "eslint.run": "onSave"
+}

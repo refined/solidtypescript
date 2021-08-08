@@ -1,0 +1,6 @@
+*.js
+*.js.map
+/9 - solid/*.py
+
+.bin
+/node_modules
