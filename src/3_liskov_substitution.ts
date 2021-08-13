@@ -4,13 +4,13 @@ export class Order {
 	private readonly prices = [];
 	public status = "open";
 
-	public add_item(name: string, quantity: number, price: number): void {
+	public addItem(name: string, quantity: number, price: number): void {
 		this.items.push(name);
 		this.quantities.push(quantity);
 		this.prices.push(price);
 	}
 
-	public total_price(): number {
+	public totalPrice(): number {
 		let total = 0;
 		for (const i in this.prices) {
 			total += this.quantities[i] * this.prices[i];
@@ -19,30 +19,37 @@ export class Order {
 	}
 }
 
+
 export interface PaymentProcessor {
-	pay(order: Order, security_code: string): void;
+	pay(order: Order, securityCode: string): void;
 }
 
 export class DebitPaymentProcessor implements PaymentProcessor {
-	public pay(order: Order, security_code: string): void {
+	constructor(private readonly securityCode: string) {}
+
+	public pay(order: Order): void {
 		console.log("Processing debit payment type");
-		console.log(`Verifying security code: ${security_code}`);
+		console.log(`Verifying security code: ${this.securityCode}`);
 		order.status = "paid";
 	}
 }
 
 export class CreditPaymentProcessor implements PaymentProcessor {
-	public pay(order: Order, security_code: string): void {
+	constructor(private readonly securityCode: string) {}
+
+	public pay(order: Order): void {
 		console.log("Processing credit payment type");
-		console.log(`Verifying security code: ${security_code}`);
+		console.log(`Verifying security code: ${this.securityCode}`);
 		order.status = "paid";
 	}
 }
 
 export class PaypalPaymentProcessor implements PaymentProcessor {
-	public pay(order: Order, security_code: string): void {
+	constructor(private readonly email: string) {}
+
+	public pay(order: Order): void {
 		console.log("Processing paypal payment type");
-		console.log(`Using email address: ${security_code}`);
+		console.log(`Using email address: ${this.email}`);
 		order.status = "paid";
 	}
 }

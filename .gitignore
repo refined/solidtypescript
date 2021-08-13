@@ -1,7 +1,10 @@
 *.js
 *.js.map
-/9 - solid/*.py
 
 .bin
+.idea
+
 /node_modules
 package-lock.json
+
+/9 - solid/*.py

@@ -4,13 +4,13 @@ export class Order {
 	private readonly prices = [];
 	public status = "open";
 
-	public add_item(name: string, quantity: number, price: number): void {
+	public addItem(name: string, quantity: number, price: number): void {
 		this.items.push(name);
 		this.quantities.push(quantity);
 		this.prices.push(price);
 	}
 
-	public total_price(): number {
+	public totalPrice(): number {
 		let total = 0;
 		for (const i in this.prices) {
 			total += this.quantities[i] * this.prices[i];
@@ -20,21 +20,21 @@ export class Order {
 }
 
 export interface PaymentProcessor {
-	pay(order: Order, security_code: string): void;
+	pay(order: Order, securityCode: string): void;
 }
 
 export class DebitPaymentProcessor implements PaymentProcessor {
-	public pay(order: Order, security_code: string): void {
+	public pay(order: Order, securityCode: string): void {
 		console.log("Processing debit payment type");
-		console.log(`Verifying security code: ${security_code}`);
+		console.log(`Verifying security code: ${securityCode}`);
 		order.status = "paid";
 	}
 }
 
 export class CreditPaymentProcessor implements PaymentProcessor {
-	public pay(order: Order, security_code: string): void {
+	public pay(order: Order, securityCode: string): void {
 		console.log("Processing credit payment type");
-		console.log(`Verifying security code: ${security_code}`);
+		console.log(`Verifying security code: ${securityCode}`);
 		order.status = "paid";
 	}
 }

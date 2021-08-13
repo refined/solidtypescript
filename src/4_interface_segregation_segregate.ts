@@ -4,13 +4,13 @@ export class Order {
     private readonly prices = [];
     public status = "open";
 
-    public add_item(name: string, quantity: number, price: number): void {
+    public addItem(name: string, quantity: number, price: number): void {
         this.items.push(name);
         this.quantities.push(quantity);
         this.prices.push(price);
     }
 
-    public total_price(): number {
+    public totalPrice(): number {
         let total = 0;
         for (const i in this.prices) {
             total += this.quantities[i] * this.prices[i];
@@ -22,12 +22,12 @@ export class Order {
 export class SmsAuthorizer {
     private authorized = false;
 
-    public verify_code(code: number): void {
+    public verifyCode(code: number): void {
         console.log(`Verifying SMS code ${code}`);
         this.authorized = true;
     }
 
-    public is_authorized(): boolean {
+    public isAuthorized(): boolean {
         return this.authorized;
     }
 }
@@ -38,40 +38,40 @@ export interface PaymentProcessor {
 
 export class DebitPaymentProcessor implements PaymentProcessor {
     constructor(
-        private readonly security_code: string,
+        private readonly securityCode: string,
         private readonly authorized: SmsAuthorizer
     ) {}
 
     public pay(order: Order): void {
-        if (this.authorized.is_authorized() === false)
+        if (this.authorized.isAuthorized() === false)
             throw new Error("Not authorized");
         console.log("Processing debit payment type");
-        console.log(`Verifying security code: ${this.security_code}`);
+        console.log(`Verifying security code: ${this.securityCode}`);
         order.status = "paid";
     }
 }
 
 export class CreditPaymentProcessor implements PaymentProcessor {
-    constructor(private readonly security_code: string) {}
+    constructor(private readonly securityCode: string) {}
 
     public pay(order: Order): void {
         console.log("Processing credit payment type");
-        console.log(`Verifying security code: ${this.security_code}`);
+        console.log(`Verifying security code: ${this.securityCode}`);
         order.status = "paid";
     }
 }
 
 export class PaypalPaymentProcessor implements PaymentProcessor {
     constructor(
-        private readonly email_address: string,
+        private readonly emailAddress: string,
         private readonly authorized: SmsAuthorizer
     ) {}
 
     public pay(order: Order): void {
-        if (this.authorized.is_authorized() === false)
+        if (this.authorized.isAuthorized() === false)
             throw new Error("Not authorized");
         console.log("Processing debit payment type");
-        console.log(`Using email address: ${this.email_address}`);
+        console.log(`Using email address: ${this.emailAddress}`);
         order.status = "paid";
     }
 }
